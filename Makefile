@@ -1,6 +1,10 @@
+
+LIB=-L/usr/local/opt/openssl/lib
+INC=-I/usr/local/opt/openssl/include
+
 ISWIN = $(or $(findstring Windows,$(OS)),$(findstring mingw,$(CROSS_COMPILE)))
-CC = $(CROSS_COMPILE)g++
-LD = $(CROSS_COMPILE)ld
+CC = $(CROSS_COMPILE)g++ $(LIB) $(INC)
+LD = $(CROSS_COMPILE)ld $(LIB)
 STRIP = $(CROSS_COMPILE)strip
 CXXFLAGS+= -Wall -DUSE_REUSABLES $(if $(ISWIN),,-DUNIXVER) -DUSE_BUILTIN_FCREATE
 LDFLAGS+= -lm
